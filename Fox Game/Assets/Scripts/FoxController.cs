@@ -51,10 +51,26 @@ public class FoxController : MonoBehaviour
 
     public void HandleWalk() 
     {
-        float movementSpeed = InputHandler.Instance.IsWalkPressed() * walkSpeed;
+        float horizontalInput = InputHandler.Instance.IsWalkPressed();
+        float targetVelocityX = horizontalInput * walkSpeed;
+        float velocityChangeX = targetVelocityX - rb.velocity.x;
+        float maxVelocityChange = (isGrounded ? walkSpeed : walkSpeed * 0.2f); // Limit air strafe velocity change
 
-        rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
+        if (isGrounded)
+        {
+            // Apply full control on the ground
+            rb.velocity = new Vector2(targetVelocityX, rb.velocity.y);
+        }
+        else
+        {
+            // In air, apply limited control based on maxVelocityChange
+            // Calculate velocity change within the allowed limit
+            velocityChangeX = Mathf.Clamp(velocityChangeX, -maxVelocityChange, maxVelocityChange);
+            rb.velocity = new Vector2(rb.velocity.x + velocityChangeX, rb.velocity.y);
+        }
     }
+
+
     private void CheckGrounded() 
     {
         isGrounded = collider.IsTouchingLayers(LayerMask.GetMask("Floor"));
