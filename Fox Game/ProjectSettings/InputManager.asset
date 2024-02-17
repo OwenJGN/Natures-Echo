@@ -9,7 +9,7 @@ InputManager:
     m_Name: Walk
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
+    negativeButton: a
     positiveButton: d
     altNegativeButton: 
     altPositiveButton: 
