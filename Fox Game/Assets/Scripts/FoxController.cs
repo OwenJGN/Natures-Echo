@@ -6,7 +6,7 @@ public class FoxController : MonoBehaviour
     private float jumpSpeed = 400f;
     private float crouchMultiplier = 0.5f;
     private float slideSpeed = 400f;
-    private float slideDuration = 0.25f;
+    private float slideDuration = 0.5f;
 
     private bool isGrounded;
     private bool isCrouching;
@@ -19,6 +19,7 @@ public class FoxController : MonoBehaviour
 
     private Vector2 originalColliderSize;
     private Vector2 crouchedColliderSize;
+    private Vector2 originalColliderOffset;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class FoxController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
 
         originalColliderSize = boxCollider.size;
+        crouchedColliderSize = new Vector2(boxCollider.size.x, boxCollider.size.y * 0.5f);
         crouchedColliderSize = new Vector2(boxCollider.size.x, boxCollider.size.y * 0.5f);
     }
 
@@ -97,12 +99,14 @@ public class FoxController : MonoBehaviour
     private void StartSliding()
     {
         isSliding = true;
-        isCrouching = true; // Ensure you're marking the character as crouching when sliding starts
+        isCrouching = true;
         slideTimer = slideDuration;
         rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * slideSpeed, rb.velocity.y);
-        boxCollider.size = crouchedColliderSize; // Reduce collider size for sliding
+        boxCollider.size = crouchedColliderSize;
+        boxCollider.offset = new Vector2(originalColliderOffset.x, originalColliderOffset.y + (crouchedColliderSize.y - originalColliderSize.y) / 2);
         animator.SetBool("IsSliding", true);
     }
+
 
     private void UpdateSliding()
     {
@@ -115,24 +119,26 @@ public class FoxController : MonoBehaviour
         }
     }
 
+    private void StopCrouching()
+    {
+        if (!isSliding) // Only reset if not currently sliding
+        {
+            isCrouching = false;
+            boxCollider.size = originalColliderSize;
+            boxCollider.offset = originalColliderOffset;
+        }
+    }
+
     private void StopSliding()
     {
         isSliding = false;
         animator.SetBool("IsSliding", false);
-        
-        if (!isCrouching)
+        // Reset collider size and offset after sliding
+        boxCollider.size = originalColliderSize;
+        boxCollider.offset = originalColliderOffset;
+        if (!InputHandler.Instance.IsCrouchPressed())
         {
-            boxCollider.size = originalColliderSize;
-        }
-    }
-
-    private void StopCrouching()
-    {
-      
-        isCrouching = false;
-        if (!isSliding)
-        {
-            boxCollider.size = originalColliderSize;
+            StopCrouching(); // Ensure crouching is stopped if crouch is not being pressed
         }
     }
 }
