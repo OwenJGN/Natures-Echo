@@ -459,7 +459,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 80
+  m_GravityScale: 160
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -657,9 +657,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0c78c2811dc4a49a763ad7f1593b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FollowSpeed: 100
+  FollowSpeed: 10
   xOffset: 90
-  yOffset: 50
+  yOffset: 40
   zOffset: -136
   target: {fileID: 924688531}
 --- !u!1 &1348342678
