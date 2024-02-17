@@ -24,12 +24,10 @@ public class FoxController : MonoBehaviour
         animator.SetBool("IsWalking", false);
         animator.SetBool("IsJumping", false);
         animator.SetBool("IsCrouching", false);
-        animator.SetBool("IsIdle", true);
     }
 
     void Update()
     {
-
         HandleWalk();
         HandleJump();
         HandleCrouch();
@@ -42,10 +40,13 @@ public class FoxController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
             animator.SetBool("IsJumping", true);
+            animator.SetBool("IsIdle", false);
+
         }
         else if (isGrounded)
         {
             animator.SetBool("IsJumping", false);
+            //animator.SetBool("IsIdle", true);
         }
     }
 
@@ -56,8 +57,10 @@ public class FoxController : MonoBehaviour
         if (isCrouchPressed)
         {
             rb.velocity = new Vector2(rb.velocity.x * crouchMultiplier, rb.velocity.y);
+            animator.SetBool("IsIdle", true);
         }
         animator.SetBool("IsCrouching", isCrouchPressed);
+        //animator.SetBool("IsIdle", !isCrouchPressed);
     }
 
     public void HandleWalk()
@@ -66,7 +69,7 @@ public class FoxController : MonoBehaviour
         float targetVelocityX = horizontalInput * walkSpeed;
         float velocityChangeX = targetVelocityX - rb.velocity.x;
         float maxVelocityChange = (isGrounded ? walkSpeed : walkSpeed * 0.2f); // Limit air strafe velocity change
-
+        
         if (isGrounded)
         {
             // Apply full control on the ground
@@ -79,9 +82,13 @@ public class FoxController : MonoBehaviour
             velocityChangeX = Mathf.Clamp(velocityChangeX, -maxVelocityChange, maxVelocityChange);
             rb.velocity = new Vector2(rb.velocity.x + velocityChangeX, rb.velocity.y);
         }
-
         // Here we ensure that IsWalking is only true if there is significant movement.
         bool isWalking = Mathf.Abs(rb.velocity.x) > 0;
+        //if (isWalking)
+        //{
+        //    animator.SetFloat("WalkSpeed", rb.velocity.x < 0 ? -1.0f : 1.0f);
+        //}
+        
         animator.SetBool("IsWalking", isWalking);
         animator.SetBool("IsIdle", !isWalking);
     }
@@ -90,7 +97,7 @@ public class FoxController : MonoBehaviour
     {
         isGrounded = collider.IsTouchingLayers(LayerMask.GetMask("Floor"));
         //// Since ground check can influence jumping animation, it's good to update it here too.
-        //animator.SetBool("IsJumping", !isGrounded && rb.velocity.y != 0);
+        animator.SetBool("IsJumping", !isGrounded && rb.velocity.y != 0);
     }
     private bool HandleStanding()
     {
