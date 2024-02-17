@@ -6,8 +6,8 @@ public class FoxController : MonoBehaviour
 {
    
 
-    private float walkSpeed = 50f;
-    private float jumpSpeed = 200f;
+    private float walkSpeed = 100f;
+    private float jumpSpeed = 400f;
     private float crouchMultiplier = 0.5f; // Assuming this reduces speed for crouching
     private bool isGrounded = true;
     private bool isCrouching;
