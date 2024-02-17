@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FollowSpeed: 100
-  xOffset: 60
+  xOffset: 90
   yOffset: 50
   zOffset: -136
   target: {fileID: 924688531}

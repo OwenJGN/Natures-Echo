@@ -12,9 +12,15 @@ public class CameraControler : MonoBehaviour
 
     void Update()
     {
+        Vector3 newPos = new Vector3(target.position.x + xOffset, target.position.y + yOffset, zOffset);
         
-        Vector3 newPos = new Vector3(target.position.x+xOffset,target.position.y+yOffset,zOffset);
-        transform.position = Vector3.Slerp(transform.position,newPos,FollowSpeed*Time.deltaTime);
+        // Define your minimum bound for the x coordinate
+        float minX = -90f;
 
+        // Ensure the new position's x coordinate is at least minX
+        newPos.x = Mathf.Max(newPos.x, minX);
+
+        // Set the camera's position using Lerp
+        transform.position = Vector3.Lerp(transform.position, newPos, FollowSpeed * Time.deltaTime);
     }
 }
