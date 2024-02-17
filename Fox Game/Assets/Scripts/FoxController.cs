@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FoxController : MonoBehaviour
 {
-    private float walkSpeed = 20f;
-    private float jumpSpeed = 80f;
+    private float walkSpeed = 120f;
+    private float jumpSpeed = 320f;
     private float crouchMultiplier = 2f;
     private bool isGrounded = true;
     private bool isCrouching;
