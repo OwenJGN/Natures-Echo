@@ -24,6 +24,7 @@ public class FoxController : MonoBehaviour
         animator.SetBool("IsWalking", false);
         animator.SetBool("IsJumping", false);
         animator.SetBool("IsCrouching", false);
+        animator.SetBool("IsIdle", true);
     }
 
     void Update()
@@ -80,8 +81,9 @@ public class FoxController : MonoBehaviour
         }
 
         // Here we ensure that IsWalking is only true if there is significant movement.
-        bool isWalking = Mathf.Abs(rb.velocity.magnitude) > 0;
+        bool isWalking = Mathf.Abs(rb.velocity.x) > 0;
         animator.SetBool("IsWalking", isWalking);
+        animator.SetBool("IsIdle", !isWalking);
     }
 
     private void CheckGrounded()
