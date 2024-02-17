@@ -19,7 +19,7 @@ public class FoxController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
+        collider = GetComponent<Collider2D>();
         // Explicitly set initial animation states
         animator.SetBool("IsWalking", false);
         animator.SetBool("IsJumping", false);
@@ -36,9 +36,7 @@ public class FoxController : MonoBehaviour
 
     public void HandleJump()
     {
-        if (InputHandler.Instance.IsJumpPressed())
-
-            CheckGrounded();
+        CheckGrounded();
         if (InputHandler.Instance.IsJumpPressed() && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
@@ -82,16 +80,15 @@ public class FoxController : MonoBehaviour
         }
 
         // Here we ensure that IsWalking is only true if there is significant movement.
-        bool isWalking = Mathf.Abs(walkSpeed) > 0;
-
+        bool isWalking = Mathf.Abs(rb.velocity.magnitude) > 0;
         animator.SetBool("IsWalking", isWalking);
     }
 
     private void CheckGrounded()
     {
         isGrounded = collider.IsTouchingLayers(LayerMask.GetMask("Floor"));
-        // Since ground check can influence jumping animation, it's good to update it here too.
-        animator.SetBool("IsJumping", !isGrounded && rb.velocity.y != 0);
+        //// Since ground check can influence jumping animation, it's good to update it here too.
+        //animator.SetBool("IsJumping", !isGrounded && rb.velocity.y != 0);
     }
     private bool HandleStanding()
     {
