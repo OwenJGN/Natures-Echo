@@ -12,18 +12,31 @@ public class FoxController : MonoBehaviour
     private bool isGrounded = true;
     private bool isCrouching;
     private Rigidbody2D rb;
-    private Collider2D collider;
+    private BoxCollider2D collider;
     private Animator animator;
+    
+    private float slideSpeed = 400f; // Adjust this value as needed
+    private bool isSliding = false;
+    private float slideDuration = 0.25f; // Duration of the slide in seconds
+    private float slideTimer;
+
+    private Vector2 originalColliderSize;
+    private Vector2 crouchedColliderSize;
+
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();
+        collider = GetComponent<BoxCollider2D>();
         // Explicitly set initial animation states
         animator.SetBool("IsWalking", false);
         animator.SetBool("IsJumping", false);
         animator.SetBool("IsCrouching", false);
+       
+        originalColliderSize = collider.size;
+        crouchedColliderSize = new Vector2(collider.size.x, collider.size.y * 0.5f);
     }
 
     void Update()
@@ -31,6 +44,16 @@ public class FoxController : MonoBehaviour
         HandleWalk();
         HandleJump();
         HandleCrouch();
+        if (isSliding)
+        {
+            slideTimer -= Time.deltaTime;
+            if (slideTimer <= 0)
+            {
+                isSliding = false;
+                //animator.SetBool("IsSliding", false); // Turn off sliding animation
+                                                      // Optionally, reduce the character's speed gradually instead of stopping abruptly
+            }
+        }
     }
 
     public void HandleJump()
@@ -52,19 +75,30 @@ public class FoxController : MonoBehaviour
 
     public void HandleCrouch()
     {
+
         bool isCrouchPressed = InputHandler.Instance.IsCrouchPressed();
         isCrouching = isCrouchPressed;
-        if (isCrouchPressed)
+        // Initiate sliding if the character is moving and crouch is pressed
+        if (isCrouchPressed && Mathf.Abs(rb.velocity.x) > 0 && !isSliding)
         {
-            rb.velocity = new Vector2(rb.velocity.x * crouchMultiplier, rb.velocity.y);
-            animator.SetBool("IsIdle", true);
+            collider.size = crouchedColliderSize;
+            isSliding = true;
+            slideTimer = slideDuration; // Reset the slide timer
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * slideSpeed, rb.velocity.y);
+           
         }
-        animator.SetBool("IsCrouching", isCrouchPressed);
+        else if (!isCrouchPressed)
+        {
+            isCrouching = false;
+            collider.size = originalColliderSize;
+
+        }
         //animator.SetBool("IsIdle", !isCrouchPressed);
     }
 
     public void HandleWalk()
     {
+        if (isSliding) return;
         float horizontalInput = InputHandler.Instance.IsWalkPressed();
         float targetVelocityX = horizontalInput * walkSpeed;
         float velocityChangeX = targetVelocityX - rb.velocity.x;
@@ -99,7 +133,7 @@ public class FoxController : MonoBehaviour
         //// Since ground check can influence jumping animation, it's good to update it here too.
         animator.SetBool("IsJumping", !isGrounded && rb.velocity.y != 0);
     }
-    private bool HandleStanding()
+    public bool HandleStanding()
     {
         return false;
     }
