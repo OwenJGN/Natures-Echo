@@ -12,7 +12,7 @@ public class CameraControler : MonoBehaviour
 
     void Update()
     {
-        Vector3 newPos = new Vector3(target.position.x + xOffset, target.position.y + yOffset, zOffset);
+        Vector3 newPos = new Vector3(target.position.x + xOffset, target.position.y + 10 + yOffset, zOffset);
         
         // Define your minimum bound for the x coordinate
         float minX = -1014f;
