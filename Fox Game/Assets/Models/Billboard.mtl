@@ -8,8 +8,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 illum 2
-map_Kd C:/Users/hb517/Downloads/IMG_1524.PNG
-map_d C:/Users/hb517/Downloads/IMG_1524.PNG
+map_Kd N:/Documents/Gamejams/Github/Fox Game/FoxGame/Fox Game/Assets/Images/Backgrounds/White Billboard.png
+map_d N:/Documents/Gamejams/Github/Fox Game/FoxGame/Fox Game/Assets/Images/Backgrounds/White Billboard.png
 
 newmtl Material
 Ns 250.000000
