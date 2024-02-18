@@ -3,7 +3,7 @@ using UnityEngine;
 public class FoxController : MonoBehaviour
 {
     private float walkSpeed = 100f;
-    private float jumpSpeed = 600f;
+    private float jumpSpeed = 400f;
     private float crouchMultiplier = 0.5f;
     private float slideSpeed = 400f;
     private float slideDuration = 0.5f;
@@ -25,13 +25,14 @@ public class FoxController : MonoBehaviour
     private float lastTapTime = 0f;
     private float doubleTapTime = 0.25f;
     private float runSpeedMultiplier = 2f;
+    private LayerMask groundLayerMask;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
-
+        groundLayerMask = LayerMask.GetMask("Floor");
         originalColliderSize = boxCollider.size;
         crouchedColliderSize = new Vector2(boxCollider.size.x, boxCollider.size.y * 0.5f);
         crouchedColliderSize = new Vector2(boxCollider.size.x, boxCollider.size.y * 0.5f);
@@ -46,6 +47,16 @@ public class FoxController : MonoBehaviour
         HandleWalk();
         HandleRun();
         UpdateSliding();
+
+    }
+
+    public void AlignWithSlope(Vector2 groundNormal)
+    {
+        float slopeAngle = Mathf.Atan2(groundNormal.y, groundNormal.x) * Mathf.Rad2Deg;
+
+        slopeAngle -= 90; 
+
+        transform.rotation = Quaternion.Euler(0, 0, slopeAngle);
     }
 
     private void HandleJump()
@@ -66,7 +77,6 @@ public class FoxController : MonoBehaviour
         bool isCrouchPressed = InputHandler.Instance.IsCrouchPressed();
         isCrouching = isCrouchPressed;
 
-        // Ensure sliding can only be initiated if the character is running
         if (isCrouchPressed && Mathf.Abs(rb.velocity.x) > 0 && !isSliding && isRunning)
         {
             StartSliding();
@@ -82,18 +92,12 @@ public class FoxController : MonoBehaviour
     {
         float horizontalInput = InputHandler.Instance.IsWalkPressed();
 
-        // Check if the character is grounded before allowing movement
         if (isGrounded)
         {
             float targetVelocityX = horizontalInput * walkSpeed;
             rb.velocity = new Vector2(targetVelocityX, rb.velocity.y);
         }
-        // Optionally, you could apply a very reduced movement in air if needed, or none at all
-        // else
-        // {
-        //     // Apply no horizontal movement in the air or very minimal if you prefer
-        // }
-
+        
         bool isWalking = Mathf.Abs(rb.velocity.x) > 0 && isGrounded;
         animator.SetBool("IsWalking", isWalking);
         animator.SetBool("IsIdle", !isWalking);
@@ -102,7 +106,23 @@ public class FoxController : MonoBehaviour
 
     private void CheckGrounded()
     {
-        isGrounded = boxCollider.IsTouchingLayers(LayerMask.GetMask("Floor"));
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+        float distance = 50f; 
+
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayerMask);
+        Debug.DrawRay(position, direction * distance, Color.red);
+        isGrounded = hit.collider != null;
+        Debug.Log(isGrounded);
+        if (isGrounded)
+        {
+            AlignWithSlope(hit.normal);
+        }
+        else
+        {
+            
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     private void StartSliding()
