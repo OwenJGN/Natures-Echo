@@ -21,6 +21,11 @@ public class FoxController : MonoBehaviour
     private Vector2 crouchedColliderSize;
     private Vector2 originalColliderOffset;
 
+    private bool isRunning = false;
+    private float lastTapTime = 0f;
+    private float doubleTapTime = 0.25f; 
+    private float runSpeedMultiplier = 2f; 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,10 +39,12 @@ public class FoxController : MonoBehaviour
 
     void Update()
     {
+        HandleDoubleTap();
         CheckGrounded();
         HandleJump();
         HandleCrouch();
         HandleWalk();
+        HandleRun(); 
         UpdateSliding();
     }
 
@@ -54,10 +61,13 @@ public class FoxController : MonoBehaviour
         }
     }
 
-    private void HandleCrouch()
+    public void HandleCrouch()
     {
         bool isCrouchPressed = InputHandler.Instance.IsCrouchPressed();
-        if (isCrouchPressed && Mathf.Abs(rb.velocity.x) > 0 && !isSliding)
+        isCrouching = isCrouchPressed;
+
+        // Ensure sliding can only be initiated if the character is running
+        if (isCrouchPressed && Mathf.Abs(rb.velocity.x) > 0 && !isSliding && isRunning)
         {
             StartSliding();
         }
@@ -67,27 +77,24 @@ public class FoxController : MonoBehaviour
         }
     }
 
-    private void HandleWalk()
+
+    public void HandleWalk()
     {
-        if (isSliding) return;
+        if (isSliding) return; 
+
         float horizontalInput = InputHandler.Instance.IsWalkPressed();
-        float targetVelocityX = horizontalInput * walkSpeed;
-        float velocityChangeX = targetVelocityX - rb.velocity.x;
-        float maxVelocityChange = (isGrounded ? walkSpeed : walkSpeed * 0.2f); 
 
-        if (isGrounded)
+        if (Mathf.Abs(horizontalInput) == 0)
         {
-            rb.velocity = new Vector2(targetVelocityX, rb.velocity.y);
+            isRunning = false;
         }
-        else
-        {
-            velocityChangeX = Mathf.Clamp(velocityChangeX, -maxVelocityChange, maxVelocityChange);
-            rb.velocity = new Vector2(rb.velocity.x + velocityChangeX, rb.velocity.y);
-        }
-        
+
+        float targetVelocityX = horizontalInput * (isRunning ? walkSpeed * runSpeedMultiplier : walkSpeed);
+        rb.velocity = new Vector2(targetVelocityX, rb.velocity.y);
+
         bool isWalking = Mathf.Abs(rb.velocity.x) > 0;
-
-        animator.SetBool("IsWalking", isWalking);
+        animator.SetBool("IsWalking", isWalking && !isRunning); 
+        //animator.SetBool("IsRunning", isRunning); 
         animator.SetBool("IsIdle", !isWalking);
     }
 
@@ -104,7 +111,7 @@ public class FoxController : MonoBehaviour
         rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * slideSpeed, rb.velocity.y);
         boxCollider.size = crouchedColliderSize;
         boxCollider.offset = new Vector2(originalColliderOffset.x, originalColliderOffset.y + (crouchedColliderSize.y - originalColliderSize.y) / 2);
-        animator.SetBool("IsSliding", true);
+        //animator.SetBool("IsSliding", true);
     }
 
 
@@ -121,7 +128,7 @@ public class FoxController : MonoBehaviour
 
     private void StopCrouching()
     {
-        if (!isSliding) // Only reset if not currently sliding
+        if (!isSliding) 
         {
             isCrouching = false;
             boxCollider.size = originalColliderSize;
@@ -132,13 +139,34 @@ public class FoxController : MonoBehaviour
     private void StopSliding()
     {
         isSliding = false;
-        animator.SetBool("IsSliding", false);
-        // Reset collider size and offset after sliding
+        //animator.SetBool("IsSliding", false);
         boxCollider.size = originalColliderSize;
         boxCollider.offset = originalColliderOffset;
         if (!InputHandler.Instance.IsCrouchPressed())
         {
-            StopCrouching(); // Ensure crouching is stopped if crouch is not being pressed
+            StopCrouching(); 
+        }
+    }
+    private void HandleDoubleTap()
+    {
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (Time.time - lastTapTime < doubleTapTime)
+            {
+                isRunning = true;
+            }
+            lastTapTime = Time.time;
+        }
+    }
+    private void HandleRun()
+    {
+        if (isRunning && Mathf.Abs(rb.velocity.x) > 0)
+        {
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * walkSpeed * runSpeedMultiplier, rb.velocity.y);
+        }
+        else
+        {
+            isRunning = false;
         }
     }
 }
