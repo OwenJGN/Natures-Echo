@@ -131,7 +131,6 @@ public class FoxController : MonoBehaviour
         rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * slideSpeed, rb.velocity.y);
         boxCollider.size = crouchedColliderSize;
         boxCollider.offset = new Vector2(originalColliderOffset.x, originalColliderOffset.y + (crouchedColliderSize.y - originalColliderSize.y) / 2);
-        //animator.SetBool("IsSliding", true);
     }
 
 
@@ -159,7 +158,6 @@ public class FoxController : MonoBehaviour
     private void StopSliding()
     {
         isSliding = false;
-        //animator.SetBool("IsSliding", false);
         boxCollider.size = originalColliderSize;
         boxCollider.offset = originalColliderOffset;
         if (!InputHandler.Instance.IsCrouchPressed())
@@ -180,20 +178,16 @@ public class FoxController : MonoBehaviour
     }
     private void HandleRun()
     {
-        // Determine if the character is running based on the velocity and the isRunning flag.
         bool isCurrentlyRunning = isRunning && Mathf.Abs(rb.velocity.x) > 0;
         Debug.Log(isCurrentlyRunning);
-        // Update the Animator's IsRunning parameter to reflect the current running state.
         animator.SetBool("IsRunning", isCurrentlyRunning);
         animator.SetBool("IsWalking", !isCurrentlyRunning);
 
-        // If the character is running, adjust the velocity for running speed.
         if (isCurrentlyRunning)
         {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * walkSpeed * runSpeedMultiplier, rb.velocity.y);
         }
 
-        // Reset the isRunning flag if the character stops (This might need adjustment based on your game's logic).
         if (!isCurrentlyRunning)
         {
             isRunning = false;
