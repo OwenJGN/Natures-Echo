@@ -25,6 +25,11 @@ public class FoxController : MonoBehaviour
 
 
 
+    private bool isRunning = false;
+    private float lastTapTime = 0f;
+    private float doubleTapTime = 0.25f; 
+    private float runSpeedMultiplier = 2f; 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,6 +46,7 @@ public class FoxController : MonoBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
         HandleWalk();
         HandleJump();
         HandleCrouch();
@@ -54,6 +60,15 @@ public class FoxController : MonoBehaviour
                                                       // Optionally, reduce the character's speed gradually instead of stopping abruptly
             }
         }
+=======
+        HandleDoubleTap();
+        CheckGrounded();
+        HandleJump();
+        HandleCrouch();
+        HandleWalk();
+        HandleRun(); 
+        UpdateSliding();
+>>>>>>> 8ff721beebbb008d7a6089404cf6e9a7b3384d66
     }
 
     public void HandleJump()
@@ -78,8 +93,14 @@ public class FoxController : MonoBehaviour
 
         bool isCrouchPressed = InputHandler.Instance.IsCrouchPressed();
         isCrouching = isCrouchPressed;
+<<<<<<< HEAD
         // Initiate sliding if the character is moving and crouch is pressed
         if (isCrouchPressed && Mathf.Abs(rb.velocity.x) > 0 && !isSliding)
+=======
+
+        // Ensure sliding can only be initiated if the character is running
+        if (isCrouchPressed && Mathf.Abs(rb.velocity.x) > 0 && !isSliding && isRunning)
+>>>>>>> 8ff721beebbb008d7a6089404cf6e9a7b3384d66
         {
             collider.size = crouchedColliderSize;
             isSliding = true;
@@ -96,10 +117,16 @@ public class FoxController : MonoBehaviour
         //animator.SetBool("IsIdle", !isCrouchPressed);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8ff721beebbb008d7a6089404cf6e9a7b3384d66
     public void HandleWalk()
     {
-        if (isSliding) return;
+        if (isSliding) return; 
+
         float horizontalInput = InputHandler.Instance.IsWalkPressed();
+<<<<<<< HEAD
         float targetVelocityX = horizontalInput * walkSpeed;
         float velocityChangeX = targetVelocityX - rb.velocity.x;
         float maxVelocityChange = (isGrounded ? walkSpeed : walkSpeed * 0.2f); // Limit air strafe velocity change
@@ -124,6 +151,20 @@ public class FoxController : MonoBehaviour
         //}
         
         animator.SetBool("IsWalking", isWalking);
+=======
+
+        if (Mathf.Abs(horizontalInput) == 0)
+        {
+            isRunning = false;
+        }
+
+        float targetVelocityX = horizontalInput * (isRunning ? walkSpeed * runSpeedMultiplier : walkSpeed);
+        rb.velocity = new Vector2(targetVelocityX, rb.velocity.y);
+
+        bool isWalking = Mathf.Abs(rb.velocity.x) > 0;
+        animator.SetBool("IsWalking", isWalking && !isRunning); 
+        //animator.SetBool("IsRunning", isRunning); 
+>>>>>>> 8ff721beebbb008d7a6089404cf6e9a7b3384d66
         animator.SetBool("IsIdle", !isWalking);
     }
 
@@ -135,6 +176,72 @@ public class FoxController : MonoBehaviour
     }
     public bool HandleStanding()
     {
+<<<<<<< HEAD
         return false;
+=======
+        isSliding = true;
+        isCrouching = true;
+        slideTimer = slideDuration;
+        rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * slideSpeed, rb.velocity.y);
+        boxCollider.size = crouchedColliderSize;
+        boxCollider.offset = new Vector2(originalColliderOffset.x, originalColliderOffset.y + (crouchedColliderSize.y - originalColliderSize.y) / 2);
+        //animator.SetBool("IsSliding", true);
+    }
+
+
+    private void UpdateSliding()
+    {
+        if (!isSliding) return;
+
+        slideTimer -= Time.deltaTime;
+        if (slideTimer <= 0)
+        {
+            StopSliding();
+        }
+    }
+
+    private void StopCrouching()
+    {
+        if (!isSliding) 
+        {
+            isCrouching = false;
+            boxCollider.size = originalColliderSize;
+            boxCollider.offset = originalColliderOffset;
+        }
+    }
+
+    private void StopSliding()
+    {
+        isSliding = false;
+        //animator.SetBool("IsSliding", false);
+        boxCollider.size = originalColliderSize;
+        boxCollider.offset = originalColliderOffset;
+        if (!InputHandler.Instance.IsCrouchPressed())
+        {
+            StopCrouching(); 
+        }
+    }
+    private void HandleDoubleTap()
+    {
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (Time.time - lastTapTime < doubleTapTime)
+            {
+                isRunning = true;
+            }
+            lastTapTime = Time.time;
+        }
+    }
+    private void HandleRun()
+    {
+        if (isRunning && Mathf.Abs(rb.velocity.x) > 0)
+        {
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * walkSpeed * runSpeedMultiplier, rb.velocity.y);
+        }
+        else
+        {
+            isRunning = false;
+        }
+>>>>>>> 8ff721beebbb008d7a6089404cf6e9a7b3384d66
     }
 }
