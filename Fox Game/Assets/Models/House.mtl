@@ -1,0 +1,272 @@
+# Blender 3.5.1 MTL File: 'House Before The Accident.blend'
+# www.blender.org
+
+newmtl Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.001
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Stairs.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Stairs.png
+
+newmtl Material.002
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.004
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hanging Plant Pot.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hanging Plant Pot.png
+
+newmtl Material.005
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hanging Plant Pot.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hanging Plant Pot.png
+
+newmtl Material.021
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+
+newmtl Material.022
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+
+newmtl Material.023
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+
+newmtl Material.024
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+
+newmtl Material.025
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Hedge.png
+
+newmtl Material.026
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.027
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.028
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.032
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.033
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.034
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.035
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.036
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.037
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.038
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.039
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.040
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+map_d N:/Documents/Gamejams/Fox Game/Being Worked On/Brick Wall.png
+
+newmtl Material.041
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Window.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Window.png
+
+newmtl Material.042
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Window.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Window.png
+
+newmtl Material.043
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Door.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Door.png
+
+newmtl Material.044
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Stairs.png
+map_d //smbhome.uscs.susx.ac.uk/hb517/Documents/Gamejams/Fox Game/Being Worked On/Stairs.png
+
+newmtl Material.045
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
