@@ -3,7 +3,7 @@ using UnityEngine;
 public class FoxController : MonoBehaviour
 {
     private float walkSpeed = 100f;
-    private float jumpSpeed = 400f;
+    private float jumpSpeed = 600f;
     private float crouchMultiplier = 0.5f;
     private float slideSpeed = 400f;
     private float slideDuration = 0.5f;
@@ -80,23 +80,25 @@ public class FoxController : MonoBehaviour
 
     public void HandleWalk()
     {
-        if (isSliding) return;
-
         float horizontalInput = InputHandler.Instance.IsWalkPressed();
 
-        if (Mathf.Abs(horizontalInput) == 0)
+        // Check if the character is grounded before allowing movement
+        if (isGrounded)
         {
-            isRunning = false;
+            float targetVelocityX = horizontalInput * walkSpeed;
+            rb.velocity = new Vector2(targetVelocityX, rb.velocity.y);
         }
+        // Optionally, you could apply a very reduced movement in air if needed, or none at all
+        // else
+        // {
+        //     // Apply no horizontal movement in the air or very minimal if you prefer
+        // }
 
-        float targetVelocityX = horizontalInput * (isRunning ? walkSpeed * runSpeedMultiplier : walkSpeed);
-        rb.velocity = new Vector2(targetVelocityX, rb.velocity.y);
-
-        bool isWalking = Mathf.Abs(rb.velocity.x) > 0;
-        animator.SetBool("IsWalking", isWalking && !isRunning);
-        //animator.SetBool("IsRunning", isRunning); 
+        bool isWalking = Mathf.Abs(rb.velocity.x) > 0 && isGrounded;
+        animator.SetBool("IsWalking", isWalking);
         animator.SetBool("IsIdle", !isWalking);
     }
+
 
     private void CheckGrounded()
     {
